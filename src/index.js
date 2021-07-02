@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 // import { Route, Switch } from "react-router-dom";
 import Palette from "./colorPicker/Palette";
 import seedColors from "./colorPicker/seedColors";
+import {generatePalette} from "./colorPicker/colorHelper"
+
 // import Food from "./router_patterns/Food";
 // import Meal from "./router_patterns/Meal";
 // import FoodSearch from "./router_patterns/foodSearch";
@@ -34,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Palette {...seedColors[3]}/>
+        <Palette palette={generatePalette(seedColors[4])}/>
 
 
 

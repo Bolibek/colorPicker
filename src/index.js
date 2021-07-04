@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-// import { BrowserRouter } from "react-router-dom";
-// import { Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Palette from "./colorPicker/Palette";
 import seedColors from "./colorPicker/seedColors";
-import {generatePalette} from "./colorPicker/colorHelper"
+import {generatePalette} from "./colorPicker/colorHelper";
+import PaletteList from "./colorPicker/PaletteList";
 
 // import Food from "./router_patterns/Food";
 // import Meal from "./router_patterns/Meal";
@@ -33,46 +34,56 @@ import "./index.css";
 // import Pokegame from "./PokeGame/pokegame.js"
 
 class App extends Component {
+  findPalette(id){
+    return seedColors.find(function(palette){
+      return palette.id === id;
+    })
+  }
   render() {
     return (
       <div className="App">
-        <Palette palette={generatePalette(seedColors[4])}/>
-
-
-
-
-
-
-        {/* <Navbar />
         <Switch>
+          <Route exact path="/" render={() => <PaletteList palettes={seedColors}/>} />
           <Route
             exact
-            path="/food/:name"
-            render={(routeProps) => <Food {...routeProps} />}
+            path="/palette/:id"
+            render={(routeProps) => (
+              <Palette
+                palette={generatePalette(
+                  this.findPalette(routeProps.match.params.id)
+                )}
+              />
+            )}
           />
-          <Route
-            exact
-            path="/food/:foodName/drink/:drinkName"
-            component={<Meal />}
-          />
-          <Route exact path="/" render={(foodProps)=> <FoodSearch {...foodProps}/>} />
-          <Route render={() => <h1>Not Found</h1>} />
-        </Switch> */}
-
+        </Switch>
+        {/* <Navbar />
+         <Switch>
+           <Route
+             exact
+             path="/food/:name"
+             render={(routeProps) => <Food {...routeProps} />}
+           />
+           <Route
+             exact
+             path="/food/:foodName/drink/:drinkName"
+             component={<Meal />}
+           />
+           <Route exact path="/" render={(foodProps)=> <FoodSearch {...foodProps}/>} />
+           <Route render={() => <h1>Not Found</h1>} />
+           </Switch> */}
         {/* <Route path="/food/banana" render={()=> <Food name="banana"/>}/>
-        <Route path="/food/beef" render={()=> <Food name="beef"/>}/> */}
-
+         <Route path="/food/beef" render={()=> <Food name="beef"/>}/> */}
         {/* <Navbar />
-        <Switch>
-          <Route exact path='/' render={() => <VendingMachine />} />
-          <Route exact path='/soda' render={() => <Soda />} />
-          <Route exact path='/sardines' render={() => <Sardines />} />
-          <Route exact path='/chips' render={() => <Chips />} />                 
-        </Switch> */}
+         <Switch>
+           <Route exact path='/' render={() => <VendingMachine />} />
+           <Route exact path='/soda' render={() => <Soda />} />
+           <Route exact path='/sardines' render={() => <Sardines />} />
+           <Route exact path='/chips' render={() => <Chips />} />                 
+         </Switch> */}
         {/* <Route exact path="/dadjoke/jokeList" component={JokeList}/> */}
         {/* <JokeList /> */}
         {/* <GitHubUser username="facebook"/>
-        <GitHubUser username="bolibek"/> */}
+         <GitHubUser username="bolibek"/> */}
         {/* <Zenquote /> */}
         {/* <Timer /> */}
         {/* <ToDoList /> */}
@@ -80,9 +91,9 @@ class App extends Component {
         {/* <Hangman /> */}
         {/* <BoxContainer /> */}
         {/* <CoinContainer /> */}
-        {/* <Lottery />
-        <Lottery title='Mini Daily' maxNum={15} numBalls={5} /> */}
-        {/* <IconList /> */}
+        {/*  <Lottery />
+         <Lottery title='Mini Daily' maxNum={15} numBalls={5} /> */}
+        {/* // <IconList /> */}
         {/* <ScoreKeeper /> */}
         {/* <Rolldice /> */}
         {/* <Game /> */}
@@ -94,8 +105,8 @@ class App extends Component {
 }
 
 ReactDOM.render(
-  // <BrowserRouter>
+  <BrowserRouter>
     <App />,
-  // </BrowserRouter>,
+ </BrowserRouter>,
   document.getElementById("root")
 );

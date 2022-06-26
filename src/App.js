@@ -4,8 +4,7 @@ import Palette from "./components/Palette";
 import PaletteList from "./components/PaletteList";
 import SingleColorPalette from "./components/SingleColorPalette";
 import seedColors from "./components/seedColors";
-import { generatePalette } from "./components/colorHelper";
-
+import NewPaletteForm from "./components/NewPaletteForm";
 class App extends Component {
 	findPalette(id) {
 		return seedColors.find(function (palette) {
@@ -20,16 +19,13 @@ class App extends Component {
 			);
 		};
 
-		// const PaletteListWrapper = (routeProps) => {
-		// 	return <PaletteList palettes={seedColors} />;
-		// };
-
 		const PaletteWrapper = (props) => {
 			const params = useParams();
 			return <Palette {...{ ...props, match: { params } }} />;
 		};
 		return (
 			<Routes>
+				<Route exact path='/palette/new' element={<NewPaletteForm />} />
 				<Route
 					exact
 					path="/palette/:paletteId/:colorId"

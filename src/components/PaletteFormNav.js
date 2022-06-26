@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import PaletteMetaForm from "./PaletteMetaForm";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
@@ -97,5 +97,4 @@ class PaletteFormNav extends Component {
     );
   }
 }
-export default PaletteFormNav;
-// export default withStyles(styles, { withTheme: true })(PaletteFormNav);
+export default withStyles(styles, { withTheme: true })(PaletteFormNav);

@@ -52,7 +52,9 @@ const styles = theme => ({
     width: "100%"
   },
   button: {
-    width: "50%"
+    width: "50%",
+    fontSize: "0.7rem",
+    padding: "0.7rem"
   }
 });
 

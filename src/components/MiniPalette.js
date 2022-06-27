@@ -4,33 +4,27 @@ import styles from "./styles/MiniPaletteStyles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from "react-router-dom";
 
-class MiniPalette extends PureComponent {
-	constructor(props) {
-		super(props);
-		this.deletePalette = this.deletePalette.bind(this);
-	}
-	deletePalette(e) {
-		this.props.openDialog(this.props.id);
-	}
-	render() {
-		const { classes, paletteName, emoji, colors } = this.props;
 
-		const miniColorBoxes = colors.map((color) => (
+function MiniPalette ({id, openDialog, classes, paletteName, emoji, colors}) {
+	const deletePalette = () => {
+		openDialog(id);
+	}
+	const miniColorBoxes = colors.map((color) => (
 			<div
 				className={classes.miniColor}
 				style={{ backgroundColor: color.color }}
 				key={color.name}
 			/>
 		));
-		return (
-			<div className={classes.root}>
+	return (
+		<div className={classes.root}>
 				<DeleteIcon
 					className={classes.deleteIcon}
 					style={{ transition: "all 0.3s ease-in-out" }}
-					onClick={this.deletePalette}
+					onClick={deletePalette}
 				/>
 				<Link
-					to={`/palette/${this.props.id}`}
+					to={`/palette/${id}`}
           className={classes.link}
 				>
 					<div className={classes.content}>
@@ -41,8 +35,7 @@ class MiniPalette extends PureComponent {
 					</div>
 				</Link>
 			</div>
-		);
-	}
+	);
 }
 
 export default withStyles(styles)(MiniPalette);

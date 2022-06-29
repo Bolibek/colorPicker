@@ -1,25 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import Navbar from "./Navbar";
 import ColorBox from "./ColorBox";
 import PaletteFooter from "./PaletteFooter";
 import styles from "./styles/PaletteStyles";
+import { useParams } from "react-router-dom";
+import {useDispatch, useSelector } from "react-redux";
+import { generatePalette } from "./colorHelpers";
+import {setShades} from "../app/actions"
 
-function SingleColorPalette({ palette, classes, colorId }) {
-	const { colors, paletteName, id, emoji } = palette;
-	const [format, setFormat] = useState("hex");
-	const [shades, setShades] = useState([]);
-
+function SingleColorPalette({ classes }) {
+const {colorId, paletteId} = useParams();
+const dispatch = useDispatch();
+	const {shades, format, palettes } = useSelector((state) => state);
+	const findPalette = (id) => palettes.find((palette) => palette.id === id);
+	const palette = generatePalette(findPalette(paletteId));
+	const { colors, paletteName, emoji, id } = palette;
 	useEffect(() => {
 		let shadesArray = [];
     let allColors = colors;
 		for (let key in allColors) {
       shadesArray = shadesArray.concat(colors[key].filter((color) => color.id === colorId));
 		}
-		setShades(shadesArray.slice(1));
-	})
-  const changeFormat = (val) => setFormat(val);
+		dispatch(setShades(shadesArray.slice(1)));
+	}, [])
   const colorBoxes = shades.map((color) => (
 			<ColorBox
 				key={color.name}
@@ -30,7 +35,7 @@ function SingleColorPalette({ palette, classes, colorId }) {
 		));
 	return (
 		<div className={classes.Palette}>
-			<Navbar handleChange={changeFormat} />
+			<Navbar />
 			<div className={classes.colors}>
 				{colorBoxes}
 				<div className={classes.goBack}>

@@ -1,87 +1,40 @@
-import { Route, Routes, useParams, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Palette from "./components/Palette";
 import PaletteList from "./components/PaletteList";
 import SingleColorPalette from "./components/SingleColorPalette";
 import Page from "./components/Page";
 import NewPaletteForm from "./components/NewPaletteForm";
-import seedColors from "./components/seedColors";
-import { generatePalette } from "./components/colorHelpers";
-import { useState } from "react";
 
 export default function App() {
-	const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
-	const [palettes, setPalettes] = useState(savedPalettes || seedColors);
-
-	const findPalette = (id) => {
-		return palettes.find((palette) => palette.id === id);
-	};
-	const handleDeletePalette = (id) => {
-		setPalettes(palettes.filter((palette) => palette.id !== id));
-		syncLocalStorage();
-	};
-	const handleSavePalette = (newPalette) => {
-		setPalettes([...palettes, newPalette]);
-		syncLocalStorage();
-	};
-	const syncLocalStorage = () => {
-		window.localStorage.setItem("palettes", JSON.stringify(palettes));
-	}
-	const NewPaletteFormWrapper = (props) => {
+	const NewPaletteFormWrapper = () => {
 		return (
 			<Page>
-				<NewPaletteForm
-					{...{
-						...props,
-						palettes: palettes,
-						savePalette: handleSavePalette,
-					}}
-				/>
+				<NewPaletteForm />
 			</Page>
 		);
 	};
 
-	const SingleColorPaletteWrapper = (props) => {
-		const params = useParams();
-		const palette = generatePalette(findPalette(params.paletteId));
+	const SingleColorPaletteWrapper = () => {
 		return (
 			<Page>
-				<SingleColorPalette
-					{...{
-						...props,
-						colorId: params.colorId,
-						palette: palette,
-					}}
-				/>
+				<SingleColorPalette />
 			</Page>
 		);
 	};
 
-	const PaletteListWrapper = (props) => {
+	const PaletteListWrapper = () => {
 		return (
 			<Page>
-				<PaletteList
-					{...{
-						...props,
-						palettes: palettes,
-						deletePalette: handleDeletePalette,
-					}}
-				/>
+				<PaletteList />
 			</Page>
 		);
 	};
 
-	const PaletteWrapper = (props) => {
-		const params = useParams();
-		const palette = generatePalette(findPalette(params.id));
+	const PaletteWrapper = () => {
 		return (
 			<Page>
-				<Palette
-					{...{
-						...props,
-						palette: palette,
-					}}
-				/>
+				<Palette />
 			</Page>
 		);
 	};
@@ -114,4 +67,3 @@ export default function App() {
 		</div>
 	);
 }
-

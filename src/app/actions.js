@@ -1,0 +1,24 @@
+import { createAction } from "@reduxjs/toolkit";
+
+export const savePalette = createAction("SAVE_PALETTE");
+export const handleDeletePalette = createAction("HANDLE_DELETE_PALETTE");
+export const handleDrawerOpen = createAction("HANDLE_DRAWER_OPEN");
+export const handleDrawerClose = createAction("HANDLE_DRAWER_CLOSE");
+export const addNewColor = createAction("ADD_NEW_COLOR");
+export const removeColor = createAction("REMOVE_COLOR");
+export const clearColors = createAction("CLEAR_COLORS");
+export const addRandomColor = createAction("ADD_RANDOM_COLOR");
+export const onSortEnd = createAction("ON_SORT_END");
+export const showForm = createAction("SHOW_FORM");
+export const hideForm = createAction("HIDE_FORM");
+export const handleNewPaletteName = createAction("HANDLE_NEW_PALETTE_NAME");
+export const showEmojiPicker = createAction("SHOW_EMOJI_PICKER");
+export const handleFormatChange = createAction("HANDLE_FORMAT_CHANGE");
+export const closeSnackbar = createAction("CLOSE_SNACKBAR");
+export const changeLevel = createAction("CHANGE_LEVEL");
+export const updateCurrentColor = createAction("UPDATE_CURRENT_COLOR");
+export const handleNewColorName = createAction("HANDLE_NEW_COLOR_NAME");
+export const changeCopyState = createAction("CHANGE_COPY_STATE");
+export const openDialog = createAction("OPEN_DIALOG");
+export const closeDialog = createAction("CLOSE_DIALOG");
+export const setShades = createAction("SET_SHADES");

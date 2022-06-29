@@ -3,12 +3,12 @@ import sizes from "./sizes";
 export default {
   ColorBox: {
     width: "20%",
-    height: props => (props.showingFullPalette ? "25%" : "50%"),
+    height: "25%",
     margin: "0 auto",
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-6px",
+    marginBottom: "-7px",
     "&:hover button": {
       opacity: 1
     },
@@ -41,11 +41,12 @@ export default {
     border: "none",
     right: "0px",
     bottom: "0px",
-    width: "60px",
+    width: "70px",
     height: "30px",
     textAlign: "center",
     lineHeight: "30px",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    // color: "white",
   },
   copyButton: {
     color: props =>

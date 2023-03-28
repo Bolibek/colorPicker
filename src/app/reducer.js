@@ -1,9 +1,10 @@
 import seedColors from "../components/seedColors";
 import { arrayMove } from "react-sortable-hoc";
-const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
-if(savedPalettes.length === 0) {
-  window.localStorage.setItem("palettes", JSON.stringify(seedColors));
+let savedPalettes = [];
+if (savedPalettes.length === 0) {
+	window.localStorage.setItem("palettes", JSON.stringify(seedColors));
 }
+savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
 
 const initialState = {
 	palettes: savedPalettes,
@@ -29,19 +30,29 @@ const reducer = (state = initialState, action) => {
 				"palettes",
 				JSON.stringify([...state.palettes, action.payload])
 			);
-			const newSavedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+			const newSavedPalettes = JSON.parse(
+				window.localStorage.getItem("palettes")
+			);
 			return {
 				...state,
 				palettes: newSavedPalettes,
 				stage: "",
 			};
 		case "HANDLE_DELETE_PALETTE":
-      const newPalettes = state.palettes.filter(palette => palette.id !== state.deletingId);
-      window.localStorage.setItem("palettes", JSON.stringify(newPalettes));
-      const restPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+			const newPalettes = state.palettes.filter(
+				(palette) => palette.id !== state.deletingId
+			);
+			window.localStorage.setItem("palettes", JSON.stringify(newPalettes));
+			const restPalettes = JSON.parse(window.localStorage.getItem("palettes"));
 			return {
 				...state,
-				palettes: restPalettes.lenght > 2? window.localStorage.setItem("palettes", JSON.stringify(seedColors)) : restPalettes,
+				palettes:
+					restPalettes.lenght > 2
+						? window.localStorage.setItem(
+								"palettes",
+								JSON.stringify(seedColors)
+						  )
+						: restPalettes,
 				openDeleteDialog: false,
 				deletingId: null,
 			};
